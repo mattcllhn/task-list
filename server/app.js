@@ -14,6 +14,9 @@ app.use(bodyParser.json());
 app.listen( port, function(){
   console.log( 'server up on', port );
 });
+
+app.use( express.static( 'public' ) );
+
 //gets baseUrl
 app.get( '/', function( req, res ){
   console.log( 'base url hit' );
@@ -36,7 +39,7 @@ app.get('/displayTasks', function(req,res){
         resultsArray.push(row);
       });
       queryResults.on('end',function(){
-        console.log(resultsArray);
+        // console.log(resultsArray);
         done();
         return res.send(resultsArray);
       }); // end queryResults.on('end')
