@@ -61,7 +61,7 @@ app.post('/addTask', function(req, res){
     }//else
   });//pg.connect
 });//app.post addTask
-app.post('/updateTask', function(req, res){
+app.put('/updateTask', function(req, res){
   pg.connect(connectionString, function(err, client, done){
     var data= req.body;
     if (err){
@@ -70,7 +70,7 @@ app.post('/updateTask', function(req, res){
     else {
       console.log(data);
       console.log('app.post/updateTask connected');
-      client.query('UPDATE tasks SET status = ($1) WHERE id = ($2)',[data.new_status,data.id]);
+      client.query('UPDATE tasks SET status = NOT status WHERE id = ($1)',[data.id]);
       res.sendStatus(200);
     }//else
   });//pg.connect
