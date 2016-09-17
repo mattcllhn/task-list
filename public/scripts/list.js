@@ -3,22 +3,42 @@ $(function(){
   console.log('jq docready');
 displayTasks();
 
-
+//listens for click, adds info to task_list table, calls displayTasks
+$('#addTask').on('click',function(){
+  var objectToSend= {
+    "description":$('#descIn').val(),
+    "status":false
+  };//objectToSend
+  $.ajax({
+    type:"POST",
+    url: "/addTask",
+    data:objectToSend,
+    success:function(data){
+      console.log('in addTask ajax success', data);
+      displayTasks();
+      $('#descIn').val("");
+    }//success
+  });//ajax object
+});//addTask onclick
 
 
 
 
 
 });//docready
-function updateTask() {
-  console.log('hello from updateTask function');
-}
-function deleteTask(){
-console.log('hello from deleteTask function');
-}
+
+//these need to take paramaters---------------------------------<<<
+function updateTask(data) {
+  console.log('hello from updateTask function',data);
+}//updateTask
+function deleteTask(data){
+console.log('hello from deleteTask function', data);
+}//deleteTask
 
 function displayTasks(){
-  var container= $('<div />').addClass('container');
+  var container= '';
+  $('#outputDiv').empty();
+  container= $('<div />').addClass('container');
   $.ajax({
     "type":"GET",
     "url": "/displayTasks",
@@ -29,13 +49,13 @@ function displayTasks(){
           html:'X',
           class:'deleteButton',
           id:'btn'+data[i].id,
-          click:function(){deleteTask(button.id);}
+          click:function(){deleteTask(this.id);}
         });//button
         var box= $('<input />',{
           type:'checkbox',
           class:'checkBox',
           id: 'cb'+data[i].id,
-          click:function(){updateTask(box.id);}
+          click:function(){updateTask(this.id);}
         })//box
         console.log(box);
         var textToDom=$('<p />',{

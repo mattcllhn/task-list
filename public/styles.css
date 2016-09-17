@@ -1,6 +1,9 @@
  h1 {
   background-color: orange;
 }
+.inputContainer{
+  background-color: pink;
+}
 .container .checkbox .textToDom{
   display:inline-block;
 }

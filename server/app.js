@@ -32,7 +32,7 @@ app.get('/displayTasks', function(req,res){
       console.log(err);
     }
     else {
-      console.log('app.post/displayTasks connected');
+      console.log('app.get/displayTasks connected');
       var resultsArray=[];
       var queryResults=client.query('SELECT * FROM tasks ORDER BY status');
       queryResults.on('row',function(row){
