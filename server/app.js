@@ -44,7 +44,7 @@ app.get('/displayTasks', function(req,res){
   }); // end pg.connect
 }); // end app.get displayTasks
 
-app.post('/addTable', function(req, res){
+app.post('/addTask', function(req, res){
   pg.connect(connectionString, function(err, client, done){
     var data= req.body;
     if (err){
@@ -52,9 +52,37 @@ app.post('/addTable', function(req, res){
     }
     else {
       console.log(data);
-      console.log('app.post/addTable connected');
+      console.log('app.post/addTask connected');
       client.query('INSERT INTO tasks (description,status ) VALUES ($1,$2)',[data.description,data.status]);
       res.sendStatus(200);
     }//else
   });//pg.connect
-});//app.post addTable
+});//app.post addTask
+app.post('/updateTask', function(req, res){
+  pg.connect(connectionString, function(err, client, done){
+    var data= req.body;
+    if (err){
+      console.log(err);
+    }
+    else {
+      console.log(data);
+      console.log('app.post/updateTask connected');
+      client.query('UPDATE tasks SET status = ($1) WHERE id = ($2)',[data.new_status,data.id]);
+      res.sendStatus(200);
+    }//else
+  });//pg.connect
+});//app.post addTask
+app.delete('/deleteTask', function(req, res){
+  pg.connect(connectionString, function(err, client, done){
+    var data= req.body;
+    if (err){
+      console.log(err);
+    }
+    else {
+      console.log(data);
+      console.log('app.post/deleteTask connected');
+      client.query('DELETE FROM tasks WHERE id = ($1)',[data.id]);
+      res.sendStatus(200);
+    }//else
+  });//pg.connect
+});//app.post addTask
