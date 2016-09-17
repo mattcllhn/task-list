@@ -62,7 +62,7 @@ console.log('hello from deleteTask function', data);
 function displayTasks(){
   $('#outputDiv').empty();
   var container= $('<div />').addClass('container');
-  
+
   $.ajax({
     "type":"GET",
     "url": "/displayTasks",
@@ -76,7 +76,7 @@ function displayTasks(){
           id:data[i].id,
           click:function(){deleteTask(this.id)}
         });//button
-        if(data.status===true){
+        if(data[i].status===true){
           console.log('in the if');
         box= $('<input />',{
           type:'checkbox',
@@ -112,6 +112,8 @@ function displayTasks(){
       }//for loop
     }//success function
   });//ajax object
-}
+}//displayTasks
+
+
 // html(data[i].description+' '+data[i].status).attr('id','item-'+data[i].id);
 // '<input type = "checkbox" id = cb'+data[i].id+'>';
