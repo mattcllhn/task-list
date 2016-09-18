@@ -61,7 +61,6 @@ console.log('hello from deleteTask function', data);
 //ajax call to get data, create and append each element and display to DOM
 function displayTasks(){
   $('#outputDiv').empty();
-  var container= $('<div />').addClass('container');
 
   $.ajax({
     "type":"GET",
@@ -69,6 +68,8 @@ function displayTasks(){
     "success":function(data){
       console.log('in success',data);
       for (var i = 0; i < data.length; i++) {
+        var container= $('<div />').addClass('container');
+
         var box= '';
         var button= $('<button />',{
           html:'X',
@@ -107,7 +108,7 @@ function displayTasks(){
         // if(data[i].status == 'true'){container.addClass('done')}
 
 
-        container.append(button).append(box).append(textToDom);
+        container.append(box).append(textToDom).append(button);
         $('#outputDiv').append(container);
       }//for loop
     }//success function

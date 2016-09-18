@@ -14,15 +14,25 @@ header{
   background-color: lightblue;
   display:block;
   border:1px solid black;
+  height: 100px;
 }
-.container .done{
-  background-color: lightgreen;
-
+.checkBox.textToDom.deleteButton{
+  width: 25%;
+    height: 75px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    box-sizing:border-box;}
+.container.checkBox{
+  float: left;
+}
+.container.textToDom{
+  float:left;
+  display: block;
+font-size: 99px;
 }
 .deleteButton{
   margin-top: 0;
 
   float: right;
 }
-.checkbox .textToDom{
-vertical-align: middle;}
